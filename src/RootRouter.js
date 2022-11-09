@@ -2,6 +2,7 @@ import React from 'react';
 import HomeScreen from './screens/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FeatureIcon from 'react-native-vector-icons/Feather';
 import DiscoverScreen from './screens/Discover';
 import FavoriteScreen from './screens/Favorite';
 import ProfileScreen from './screens/Profile';
@@ -10,15 +11,33 @@ const Tab = createBottomTabNavigator();
 
 function RootRouter() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#007bff',
+        tabBarInactiveTintColor: '#8cb5e2',
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: {
+          height: 60,
+          borderRadius: 15,
+          overflow: 'hidden',
+          position: 'absolute',
+          bottom: 15,
+          left: 15,
+          right: 15,
+          elevation: 1,
+        },
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({size, focused}) => (
-            <Icon name={focused ? 'home' : 'home-outline'} size={size} />
+          tabBarIcon: ({size, focused, color}) => (
+            <Icon
+              name={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -26,10 +45,12 @@ function RootRouter() {
         name="Discover"
         component={DiscoverScreen}
         options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({size, focused}) => (
-            <Icon name={focused ? 'earth' : 'earth-outline'} size={size} />
+          tabBarIcon: ({size, focused, color}) => (
+            <Icon
+              name={focused ? 'earth' : 'earth-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -37,12 +58,11 @@ function RootRouter() {
         name="Favorite"
         component={FavoriteScreen}
         options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({size, focused}) => (
+          tabBarIcon: ({size, focused, color}) => (
             <Icon
               name={focused ? 'bookmark' : 'bookmark-outline'}
               size={size}
+              color={color}
             />
           ),
         }}
@@ -51,12 +71,11 @@ function RootRouter() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({size, focused}) => (
-            <Icon
-              name={focused ? 'person-circle' : 'person-circle-outline'}
+          tabBarIcon: ({size, focused, color}) => (
+            <FeatureIcon
+              name={focused ? 'user' : 'user'}
               size={size}
+              color={color}
             />
           ),
         }}

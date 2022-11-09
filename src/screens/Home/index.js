@@ -3,8 +3,13 @@ import {Text, View} from 'react-native';
 
 function HomeScreen() {
   return (
-    <View>
-      <Text>asd</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Home</Text>
     </View>
   );
 }
