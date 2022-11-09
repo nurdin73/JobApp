@@ -1,117 +1,54 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {Text, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+function HomeScreen() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home!</Text>
     </View>
   );
-};
+}
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function SettingsScreen() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Settings!</Text>
+    </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const Tab = createBottomTabNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({focused, size}) => (
+              <Ionicons name="home" size={size} />
+            ),
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: ({focused, size}) => (
+              <Ionicons name="cog" size={size} />
+            ),
+            headerShown: false,
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default App;
